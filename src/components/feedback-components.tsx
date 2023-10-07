@@ -5,13 +5,34 @@ import useFeedbackStore from "@/store";
 import FeedbackForm from "./feedback-form";
 import FeedbackList from "./feedback-list";
 import FeedbackStats from "./feedback-stats";
+import { useCallback, useState } from "react";
 
 export default function FeedbackComponents() {
   const store = useFeedbackStore();
+
+    const useSearchFeedbacks = () => {
+        return useCallback((query: string) => {
+            return fetch(`/api/feedbacks/search?q=${query}`)
+                .then(r => r.json());
+        }, []);
+    }
+
+    const searchFeedbacks = useSearchFeedbacks();
+
+    const onSearch = useCallback(
+        async (query: string) => {
+            const feedbacks = await searchFeedbacks(query);
+
+            // TODO - store feedback 업데이트
+            store.setFeedbackList(feedbacks);
+        },
+        [searchFeedbacks]
+    );
+
   return (
     <>
       <main className="md:container mt-24 px-5">
-        <FeedbackForm />
+        <FeedbackForm onSearch={onSearch} />
         <FeedbackStats />
         <FeedbackList />
       </main>

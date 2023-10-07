@@ -1,5 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
+import { getElasticClient } from "@/core/elastic";
+import { useCallback } from "react";
 
 export async function GET(request: NextRequest) {
   try {
@@ -50,6 +52,15 @@ export async function POST(request: Request) {
         feedback,
       },
     };
+
+    // elastic에 데이터를 추가함
+    const elastic = await getElasticClient();
+
+    await elastic.index({
+      body: feedback,
+      index: `feedbacks`,
+    });
+
     return new NextResponse(JSON.stringify(json_response), {
       status: 201,
       headers: { "Content-Type": "application/json" },
