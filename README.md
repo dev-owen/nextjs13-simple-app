@@ -72,3 +72,6 @@ In this tutorial, you'll learn how to create a frontend application in the new N
 
 Read the entire article here: [https://codevoweb.com/build-a-simple-frontend-app-in-nextjs13-app-directory/](https://codevoweb.com/build-a-simple-frontend-app-in-nextjs13-app-directory/)
 
+## 3. Elastic Search in Nextjs
+
+[Article](https://makerkit.dev/blog/tutorials/nextjs-elasticsearch)
