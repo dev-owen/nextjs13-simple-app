@@ -1,3 +1,25 @@
+## ElasticSearch 프로젝트
+
+### 주제 : ES를 활용하여 피드백 리스트에서 검색 기능을 구현한다.
+
+### 기술 스택
+
+- TypeScript
+- Next.js(FE + API)
+- ElasticSearch
+- Prisma ORM
+- SQLite DB
+- pnpm
+- zustand (Global State Management)
+
+### 기능
+
+1. 피드백 인덱스에서 키워드 필드 기반 도큐먼트 검색(텍스트 타입)
+2. 검색 결과 내에서의 점수 집계(검색으로 나온 결과들의 max, min, avg 등)
+3. 점수를 바탕으로 피드백 집계 (범위 형태로 구현, 예를 들면 7~10점 사이의 피드백만 검색)
+4. 2, 3번 작업을 키바나로 시각화
+5. 운영 환경 배포
+
 ## 1. Build a Simple API in Next.js 13 App Directory
 
 In this article, you will learn how to build a basic RESTful API in the new Next.js 13 app directory. Next.js 13.2 introduced a new approach to building APIs in the App Router (app), where we can create custom request handlers for a given route using the Web Request and Response APIs.
