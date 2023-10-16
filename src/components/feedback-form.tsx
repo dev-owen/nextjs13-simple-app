@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import Rating from "./rating";
 import useFeedbackStore from "@/store";
 import { apiCreateFeedback } from "@/api-requests";
+import FeedbackSearchForm from "@/components/feedback-search";
 
 export default function FeedbackForm({onSearch}: any) {
   const [text, setText] = useState("");
@@ -86,36 +87,11 @@ export default function FeedbackForm({onSearch}: any) {
             Send
           </button>
         </div>
-        <form onSubmit={e => {
-          e.preventDefault();
-          const query = new FormData(e.currentTarget).get('query');
-          onSearch(query as string);
-        }}>
-          <div className="flex border rounded-lg my-4 px-2 py-3">
-          <input
-              type="text"
-              name="query"
-              className="flex-grow border-none text-lg focus:outline-none"
-              placeholder="for search"
-          />
-          <button
-              type="submit"
-              disabled={store.page_loading}
-              className={twMerge(
-                  "border-0 rounded-md w-28 h-10 cursor-pointer hover:bg-indigo-500",
-                  store.page_loading
-                      ? "bg-[#ccc] text-gray-800"
-                      : "bg-indigo-600 text-white"
-              )}
-          >
-            Search
-          </button>
-          </div>
-        </form>
         {message && (
           <div className="pt-3 text-center text-purple-600">{message}</div>
         )}
       </form>
+      <FeedbackSearchForm />
     </div>
   );
 }

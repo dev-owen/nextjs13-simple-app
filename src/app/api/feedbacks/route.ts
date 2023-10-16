@@ -1,7 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 import { getElasticClient } from "@/core/elastic";
-import { useCallback } from "react";
 
 export async function GET(request: NextRequest) {
   try {

@@ -1,12 +1,13 @@
 import { getElasticClient } from "@/core/elastic";
 import { NextApiRequest, NextApiResponse } from "next";
-import { useCallback } from "react";
 
-async function tasksSearchHandler(
+export async function feedbacksSearchHandler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
     const { q: query } = req.query;
+
+    console.log('query', query);
 
     // validate the "q" query parameter exists and is a string
     if (!query || typeof query !== 'string') {
@@ -16,13 +17,15 @@ async function tasksSearchHandler(
     const elastic = await getElasticClient();
 
     const result = await elastic.search({
-        index: 'feedback*',
+        index: 'feedbacks',
         query: {
             match: {
                 text: query,
             },
         },
     });
+
+    console.log('result', result);
 
     // we send back the list of documents found
     const feedbacks = result.hits.hits.map((item) => item._source);
